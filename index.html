@@ -627,6 +627,9 @@
   <!-- JAVASCRIPT / ESTADO DE LA APLICACIÓN -->
   <script>
     // ESTADO DE DATOS (Basado en la genética de La Aguada)
+    const STORAGE_KEY = 'laaguada_catalog_state_v1';
+    const DATA_FILE_PATH = './catalog-data.json';
+
     let horses = [
       {
         id: 1,
@@ -700,6 +703,46 @@
     let tempImages = [];
     let isAdminMode = false;
     let activeCategory = 'all';
+
+    function saveCatalogData() {
+      const payload = JSON.stringify({ horses, categories });
+      localStorage.setItem(STORAGE_KEY, payload);
+    }
+
+    async function loadCatalogData() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (parsed && Array.isArray(parsed.horses) && Array.isArray(parsed.categories)) {
+            horses = parsed.horses;
+            categories = parsed.categories;
+            if (!categories.some(cat => cat.id === 'all')) {
+              categories.unshift({ id: 'all', name: 'Todos los Ejemplares' });
+            }
+            return;
+          }
+        } catch (error) {
+          console.warn('No se pudo cargar el estado guardado:', error);
+        }
+      }
+
+      try {
+        const response = await fetch(DATA_FILE_PATH, { cache: 'no-store' });
+        if (!response.ok) throw new Error('No se pudo cargar catalog-data.json');
+        const data = await response.json();
+        if (data && Array.isArray(data.horses) && Array.isArray(data.categories)) {
+          horses = data.horses;
+          categories = data.categories;
+          if (!categories.some(cat => cat.id === 'all')) {
+            categories.unshift({ id: 'all', name: 'Todos los Ejemplares' });
+          }
+          saveCatalogData();
+        }
+      } catch (error) {
+        console.warn('Fallo la carga del JSON base. Usando datos locales:', error);
+      }
+    }
 
     function getCategoryLabel(categoryId) {
       const match = categories.find(cat => cat.id === categoryId);
@@ -914,6 +957,7 @@
         horses.unshift(newHorse);
       }
 
+      saveCatalogData();
       resetForm();
       renderCategoryFilters();
       renderHorses(horses);
@@ -972,6 +1016,7 @@
         activeCategory = 'all';
       }
 
+      saveCatalogData();
       renderCategoryFilters();
       renderCategorySelect();
       renderAdminCategoriesTable();
@@ -1010,6 +1055,7 @@
     function deleteHorse(id) {
       if (confirm('¿Está seguro de quitar este ejemplar del catálogo oficial de La Aguada?')) {
         horses = horses.filter(h => h.id !== id);
+        saveCatalogData();
         renderHorses(horses);
         renderAdminTable();
       }
@@ -1172,7 +1218,8 @@
     }
 
     // INICIALIZACIÓN AL CARGAR LA PÁGINA
-    window.onload = function() {
+    window.onload = async function() {
+      await loadCatalogData();
       renderCategoryFilters();
       renderCategorySelect();
       renderAdminCategoriesTable();
