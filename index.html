@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Aguada Polo & Casa de Campo · Catálogo de Ejemplares</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome & Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            aguada: {
+              burgundy: '#6B1420',
+              darkBurgundy: '#4A0B14',
+              lightBurgundy: '#8C1D2C',
+              gold: '#C5A059',
+              goldLight: '#E6D2A7',
+              cream: '#FAFAFAF',
+              sand: '#F4F1EA',
+              charcoal: '#1C1C1C',
+              muted: '#666666'
+            }
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Montserrat"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --aguada-red: #6B1420;
+      --aguada-red-dark: #4A0B14;
+      --aguada-gold: #C5A059;
+      --aguada-gold-soft: #E9D7A6;
+      --aguada-ivory: #F8F4EF;
+      --aguada-sand: #F1E9DF;
+      --aguada-charcoal: #1F1A1A;
+      --aguada-muted: #5F5A5A;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at top, rgba(197,160,89,0.10), transparent 25%),
+        linear-gradient(180deg, #FBF9F7 0%, #F4EFEA 100%);
+      color: var(--aguada-charcoal);
+      font-family: 'Montserrat', sans-serif;
+      background-attachment: fixed;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(255,255,255,0.14), rgba(255,255,255,0.14));
+      opacity: 0.5;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F4F1EA;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #6B1420;
+      border-radius: 3px;
+    }
+
+    /* Custom Animations & Transitions */
+    .fade-in {
+      animation: fadeIn 0.4s ease-in-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .brand-mark {
+      filter: drop-shadow(0 14px 24px rgba(0,0,0,0.18));
+      transition: transform 0.25s ease;
+    }
+
+    .brand-mark:hover {
+      transform: scale(1.02);
+    }
+
+    .luxury-panel {
+      background: rgba(255,255,255,0.78);
+      border: 1px solid rgba(197,160,89,0.22);
+      box-shadow: 0 20px 40px -28px rgba(75, 15, 20, 0.25);
+      backdrop-filter: blur(10px);
+    }
+
+    .magazine-hero {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(197,160,89,0.2);
+      background:
+        linear-gradient(135deg, rgba(75,11,20,0.86), rgba(107,20,32,0.65)),
+        url('https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      box-shadow: 0 30px 70px -35px rgba(27,12,15,0.7);
+    }
+
+    .magazine-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(18,10,12,0.5), rgba(18,10,12,0.12) 35%, rgba(18,10,12,0.3));
+    }
+
+    .editorial-card {
+      background: rgba(255,255,255,0.9);
+      border: 1px solid rgba(107,20,32,0.08);
+      box-shadow: 0 24px 48px -32px rgba(28,17,17,0.35);
+      transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+    }
+
+    .editorial-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 30px 55px -30px rgba(28,17,17,0.42);
+      border-color: rgba(197,160,89,0.42);
+    }
+
+    .editorial-card .image-wrap {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #eae3d8, #d9d0c4);
+    }
+
+    .editorial-card .image-wrap::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(29, 17, 17, 0.2), rgba(29, 17, 17, 0));
+      pointer-events: none;
+    }
+
+    .editorial-label {
+      letter-spacing: 0.22em;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .editorial-title {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      letter-spacing: 0.01em;
+      line-height: 0.88;
+    }
+
+    .magazine-copy {
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .nav-pill {
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    .nav-pill::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -3px;
+      height: 1px;
+      background: rgba(197,160,89,0.9);
+      transform: scaleX(0);
+      transition: transform 0.2s ease;
+    }
+
+    .nav-pill:hover::after,
+    .nav-pill:focus-visible::after {
+      transform: scaleX(1);
+    }
+
+    /* Glassmorphism & Borders */
+    .border-gold-glow {
+      border: 1px solid rgba(197, 160, 89, 0.3);
+      transition: all 0.3s ease;
+    }
+    .border-gold-glow:hover {
+      border-color: rgba(197, 160, 89, 0.8);
+      box-shadow: 0 10px 30px -10px rgba(107, 20, 32, 0.15);
+    }
+
+    .modal-backdrop {
+      background: rgba(15, 5, 8, 0.8);
+      backdrop-filter: blur(4px);
+    }
+
+    @media (max-width: 768px) {
+      .top-strip-text {
+        font-size: 10px;
+        line-height: 1.6;
+      }
+
+      .header-shell {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      .nav-pill {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-aguada-burgundy selection:text-white">
+
+  <!-- TOP BAR DE INFORMACIÓN DE LUJO -->
+  <div class="bg-aguada-darkBurgundy text-white text-xs border-b border-aguada-gold/30 px-4 py-2.5">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
+      <div class="top-strip-text flex flex-wrap items-center justify-center md:justify-start gap-3 md:gap-4 text-aguada-goldLight/90 tracking-wider text-[11px] font-light">
+        <span><i class="fa-solid fa-location-dot text-aguada-gold mr-1.5"></i> Open Door – Ruta 192 – Km 10.5</span>
+        <span class="hidden sm:inline">|</span>
+        <span class="hidden sm:inline"><i class="fa-solid fa-trophy text-aguada-gold mr-1.5"></i> Ganadores de la Triple Corona de Polo</span>
+      </div>
+      <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-center sm:text-left">
+        <a href="https://wa.me/5491141571217" target="_blank" class="hover:text-aguada-gold transition-colors text-[11px] tracking-wider">
+          <i class="fa-brands fa-whatsapp text-green-400 mr-1"></i> Hume Thomas: +54 9 11 4157-1217
+        </a>
+        <button id="toggleAdminBtn" onclick="toggleView()" class="bg-transparent hover:bg-aguada-gold hover:text-aguada-darkBurgundy text-aguada-gold border border-aguada-gold/50 px-3 py-1 rounded text-[10px] tracking-widest font-semibold uppercase transition-all duration-300">
+          <i class="fa-solid fa-sliders mr-1"></i> Modo Administración
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER PRINCIPAL ESTILO LA AGUADA -->
+  <header class="bg-aguada-burgundy text-white shadow-xl relative overflow-hidden">
+    <!-- Subtle Background Texture Pattern Overlay -->
+    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#C5A059_1px,transparent_1px)] [background-size:16px_16px]"></div>
+
+    <div class="header-shell max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-10 relative z-10 text-center flex flex-col items-center">
+      
+      <!-- LOGO OFICIAL EN PNG -->
+      <div class="mb-4 flex flex-col items-center group cursor-pointer">
+        <div class="relative py-2 px-6 flex flex-col items-center">
+          <img src="https://www.laaguadapolo.com/wp-content/uploads/2023/09/la-aguada-logo.png" alt="La Aguada Polo & Casa de Campo" class="brand-mark h-24 md:h-28 w-auto object-contain select-none" />
+          <div class="mt-3 text-white font-serif tracking-[0.28em] text-[10px] md:text-xs font-medium uppercase text-center border-t border-aguada-gold/30 pt-2 w-full">
+            Polo & Casa de Campo
+          </div>
+        </div>
+      </div>
+
+      <!-- SUBTÍTULO Y DISTINCIÓN DE MARCA -->
+      <p class="text-aguada-gold text-[10px] sm:text-xs md:text-sm font-light tracking-[0.22em] uppercase mb-4">
+        Cría, deporte y estilo de vida en el polo argentino
+      </p>
+
+      <!-- NAVEGACIÓN PRINCIPAL -->
+      <nav class="flex flex-wrap justify-center gap-3 sm:gap-6 md:gap-10 border-t border-b border-aguada-gold/30 py-3 mt-2 w-full max-w-3xl text-[10px] sm:text-xs tracking-[0.12em] font-light uppercase text-gray-200">
+        <button onclick="switchTab('catalog')" id="navCatalog" class="nav-pill hover:text-aguada-gold text-aguada-gold font-medium transition-colors cursor-pointer border-b-2 border-aguada-gold pb-1">Catálogo</button>
+        <button onclick="switchTab('bloodlines')" id="navBloodlines" class="nav-pill hover:text-aguada-gold transition-colors cursor-pointer pb-1">Líneas de Sangre</button>
+        <button onclick="switchTab('clinic')" id="navClinic" class="nav-pill hover:text-aguada-gold transition-colors cursor-pointer pb-1">Polo Clinic</button>
+        <a href="#contacto" onclick="scrollToFooter()" class="nav-pill hover:text-aguada-gold transition-colors cursor-pointer pb-1">Contacto</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow w-full">
+
+    <!-- SECCIÓN: CATÁLOGO DE EJEMPLARES (VISTA PÚBLICA) -->
+    <div id="catalogTab" class="fade-in space-y-8">
+      
+      <!-- HERO MINI SECTION -->
+      <div class="magazine-hero relative max-w-6xl mx-auto mb-8 rounded-[28px] px-5 py-7 md:px-10 md:py-10 text-white">
+        <div class="relative z-10 mx-auto max-w-3xl text-center space-y-4">
+          <span class="magazine-copy inline-flex items-center justify-center rounded-full border border-white/25 bg-white/6 px-3 py-1 text-white/80">
+            Selección premium
+          </span>
+          <h2 class="font-serif text-4xl md:text-6xl text-white font-normal tracking-[0.02em] leading-[0.88]">
+            Selección de Ejemplares de Alto Handicap
+          </h2>
+          <p class="text-white/75 text-xs md:text-sm font-light leading-relaxed max-w-2xl mx-auto">
+            Descubra nuestra caballada creada bajo los estándares más exigentes de la genética argentina, combinando la velocidad, estructura, docilidad y carácter competitivo del sello Novillo Astrada.
+          </p>
+          <div class="w-16 h-0.5 bg-aguada-gold mx-auto mt-1 opacity-90"></div>
+        </div>
+      </div>
+
+      <!-- BARRA DE FILTROS Y BÚSQUEDA -->
+      <div class="bg-white/90 p-4 md:p-5 rounded-[18px] border border-aguada-sand shadow-[0_20px_40px_-30px_rgba(0,0,0,0.35)] flex flex-col md:flex-row justify-between items-center gap-4 backdrop-blur-sm">
+        
+        <!-- Categorías -->
+        <div id="categoryFilters" class="flex flex-wrap gap-2 w-full md:w-auto justify-center md:justify-start"></div>
+
+        <!-- Buscador -->
+        <div class="relative w-full md:w-72">
+          <input type="text" id="searchInput" onkeyup="searchHorses()" placeholder="Buscar por nombre o pedigree..." 
+                 class="w-full pl-9 pr-4 py-2 text-xs bg-aguada-sand/50 border border-gray-200 rounded focus:outline-none focus:border-aguada-gold focus:ring-1 focus:ring-aguada-gold transition-all">
+          <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-gray-400 text-xs"></i>
+        </div>
+
+      </div>
+
+      <!-- GRID DE TARJETAS DE CABALLOS -->
+      <div id="horsesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Renderizado dinámico vía JavaScript -->
+      </div>
+
+    </div>
+
+    <!-- SECCIÓN EXTRA: LÍNEAS DE SANGRE (INFO CONTEXTUAL) -->
+    <div id="bloodlinesTab" class="hidden fade-in bg-white p-8 md:p-12 rounded-lg border border-aguada-sand shadow-sm space-y-6">
+      <div class="text-center max-w-2xl mx-auto space-y-3">
+        <span class="text-aguada-gold text-xs uppercase tracking-widest font-semibold">Tradición y Excelencia</span>
+        <h2 class="font-serif text-3xl text-aguada-burgundy">Nuestras Líneas de Sangre</h2>
+        <p class="text-gray-600 text-xs md:text-sm leading-relaxed">
+          La Aguada ha desarrollado una línea genética propia consolidada a lo largo de décadas de participación en los torneos más relevantes del mundo, combinando los mejores padrillos Polo Argentino con mares consagradas de la Triple Corona.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
+        <div class="p-6 bg-aguada-sand/40 border border-aguada-gold/20 rounded-lg text-center space-y-2">
+          <i class="fa-solid fa-dna text-2xl text-aguada-burgundy mb-2"></i>
+          <h3 class="font-serif text-lg font-semibold text-aguada-burgundy">Familia Novillo Astrada</h3>
+          <p class="text-xs text-gray-600">Líneas de madres probadas en Palermo con alto índice de reproducibilidad de mansedumbre y potencia.</p>
+        </div>
+        <div class="p-6 bg-aguada-sand/40 border border-aguada-gold/20 rounded-lg text-center space-y-2">
+          <i class="fa-solid fa-horse-head text-2xl text-aguada-burgundy mb-2"></i>
+          <h3 class="font-serif text-lg font-semibold text-aguada-burgundy">Padrillos Consagrados</h3>
+          <p class="text-xs text-gray-600">Servicios e inseminación con padrillos reconocidos por la AACCP (Asociación Argentina de Criadores de Caballos de Polo).</p>
+        </div>
+        <div class="p-6 bg-aguada-sand/40 border border-aguada-gold/20 rounded-lg text-center space-y-2">
+          <i class="fa-solid fa-[#C5A059] fa-medal text-2xl text-aguada-burgundy mb-2"></i>
+          <h3 class="font-serif text-lg font-semibold text-aguada-burgundy">Campañas Deportivas</h3>
+          <p class="text-xs text-gray-600">Ejemplares evaluados en exigencia de alto handicap (Abierto de Tortugas, Hurlingham y Palermo).</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN EXTRA: POLO CLINIC (INFO CONTEXTUAL) -->
+    <div id="clinicTab" class="hidden fade-in bg-white p-8 md:p-12 rounded-lg border border-aguada-sand shadow-sm space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <div class="space-y-4">
+          <span class="text-aguada-gold text-xs uppercase tracking-widest font-semibold">Experiencia Única</span>
+          <h2 class="font-serif text-3xl text-aguada-burgundy">La Aguada Polo Clinic</h2>
+          <p class="text-gray-600 text-xs md:text-sm leading-relaxed">
+            Más de 10 años enseñando a jugadores de polo de todo el mundo. Entrene en nuestras 5 canchas de nivel internacional de la mano de entrenadores y profesionales de La Aguada. Proba nuestros ejemplares directamente en la cancha antes de la adquisición.
+          </p>
+          <ul class="text-xs space-y-2 text-gray-700 font-medium">
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-aguada-gold"></i> Prueba personalizada de ejemplares en venta</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-aguada-gold"></i> Asesoramiento técnico por Miguel Novillo Astrada</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-aguada-gold"></i> Estada exclusiva en Casa de Campo La Aguada</li>
+          </ul>
+        </div>
+        <div class="rounded-lg overflow-hidden shadow-lg border border-aguada-gold/30">
+          <img src="https://images.unsplash.com/photo-1551884170-09fb70a3a2ed?auto=format&fit=crop&w=800&q=80" alt="Polo Clinic" class="w-full h-64 object-cover">
+        </div>
+      </div>
+    </div>
+
+    <!-- TARJETA ELEGANTE DE UBICACIÓN & CONTACTO RÁPIDO (NUEVO WIDGET DESTACADO) -->
+    <div class="mt-12 bg-white border border-aguada-gold/30 rounded-lg p-5 md:p-8 shadow-md">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+        
+        <div class="space-y-2 border-b md:border-b-0 md:border-r border-aguada-gold/20 pb-4 md:pb-0 md:pr-6">
+          <span class="text-aguada-gold text-[10px] font-semibold uppercase tracking-widest">Atención Personalizada</span>
+          <h3 class="font-serif text-xl text-aguada-burgundy font-medium">Contacto Comercial</h3>
+          <p class="text-xs text-gray-600">Coordine visitas, pruebas de juego y asesoramiento en cría directamente con nuestro equipo.</p>
+          <div class="pt-2 space-y-1 text-xs">
+            <div class="font-semibold text-aguada-burgundy"><i class="fa-solid fa-user-check text-aguada-gold mr-1.5"></i> Hume Thomas</div>
+            <div><i class="fa-brands fa-whatsapp text-emerald-600 mr-1.5"></i> <a href="https://wa.me/5491141571217" target="_blank" class="hover:underline">+54 9 11 4157-1217</a></div>
+            <div><i class="fa-solid fa-envelope text-aguada-gold mr-1.5"></i> <a href="mailto:laaguada@laaguadapolo.com" class="hover:underline">laaguada@laaguadapolo.com</a></div>
+          </div>
+        </div>
+
+        <div class="space-y-2 border-b md:border-b-0 md:border-r border-aguada-gold/20 pb-4 md:pb-0 md:pr-6">
+          <span class="text-aguada-gold text-[10px] font-semibold uppercase tracking-widest">Nuestra Sede</span>
+          <h3 class="font-serif text-xl text-aguada-burgundy font-medium">Open Door · Buenos Aires</h3>
+          <p class="text-xs text-gray-600">Open Door – Ruta 192 – Km 10.5</p>
+          <div class="text-[11px] text-gray-500 font-mono">
+            Latitud: 34°28’12.2″S<br>Longitud: 59°05’33.5″W
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-3 justify-center">
+          <a href="https://maps.google.com/?q=-34.470056,-59.092639" target="_blank" 
+             class="bg-aguada-burgundy hover:bg-aguada-darkBurgundy text-white py-2.5 px-4 rounded text-xs font-semibold uppercase tracking-wider text-center transition-all flex items-center justify-center gap-2 shadow-sm">
+            <i class="fa-solid fa-map-location-dot text-aguada-gold"></i> Abrir en Google Maps
+          </a>
+          <a href="https://instagram.com/laaguada_polo" target="_blank" 
+             class="border border-aguada-burgundy hover:bg-aguada-burgundy hover:text-white text-aguada-burgundy py-2.5 px-4 rounded text-xs font-semibold uppercase tracking-wider text-center transition-all flex items-center justify-center gap-2">
+            <i class="fa-brands fa-instagram text-lg"></i> @laaguada_polo
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SECCIÓN: PANEL DE ADMINISTRACIÓN (VISTA ADM) -->
+    <section id="adminView" class="hidden fade-in bg-white border border-aguada-gold/40 rounded-lg p-4 sm:p-6 md:p-10 shadow-xl space-y-8">
+      
+      <div class="border-b border-gray-200 pb-4 flex justify-between items-center">
+        <div>
+          <span class="text-aguada-gold text-xs uppercase tracking-widest font-semibold">Gestión Privada</span>
+          <h2 class="font-serif text-2xl md:text-3xl text-aguada-burgundy font-medium" id="formTitle">
+            Agregar Nuevo Ejemplar al Catálogo
+          </h2>
+        </div>
+        <button onclick="toggleView()" class="text-xs text-gray-500 hover:text-aguada-burgundy underline">
+          <i class="fa-solid fa-arrow-left mr-1"></i> Volver a vista cliente
+        </button>
+      </div>
+
+      <!-- FORMULARIO DE ALTA / EDICIÓN -->
+      <form id="horseForm" onsubmit="handleFormSubmit(event)" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <input type="hidden" id="admId">
+
+        <div class="space-y-1">
+          <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Nombre del Ejemplar *</label>
+          <input type="text" id="admNombre" required placeholder="Ej: La Aguada Cuartetera" 
+                 class="w-full p-2.5 text-xs border border-gray-300 rounded focus:border-aguada-gold focus:outline-none">
+        </div>
+
+        <div class="space-y-1">
+          <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Categoría *</label>
+          <select id="admCategoria" class="w-full p-2.5 text-xs border border-gray-300 rounded focus:border-aguada-gold focus:outline-none">
+            <option value="padrillo">Padrillo / Genética</option>
+            <option value="cancha">Jugando / Cancha</option>
+            <option value="mancebo">Potro / Mancebo</option>
+          </select>
+        </div>
+
+        <div class="space-y-1">
+          <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Padre (Genética)</label>
+          <input type="text" id="admPadre" placeholder="Ej: Dolfina Cuarteto" 
+                 class="w-full p-2.5 text-xs border border-gray-300 rounded focus:border-aguada-gold focus:outline-none">
+        </div>
+
+        <div class="space-y-1">
+          <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Madre (Genética)</label>
+          <input type="text" id="admMadre" placeholder="Ej: La Aguada Pólvora" 
+                 class="w-full p-2.5 text-xs border border-gray-300 rounded focus:border-aguada-gold focus:outline-none">
+        </div>
+
+        <div class="space-y-1">
+          <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Año de Nacimiento</label>
+          <input type="text" id="admAnio" placeholder="Ej: 2018" 
+                 class="w-full p-2.5 text-xs border border-gray-300 rounded focus:border-aguada-gold focus:outline-none">
+        </div>
+
+        <div class="space-y-1">
+          <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Pelaje</label>
+          <input type="text" id="admPelaje" placeholder="Ej: Zaino / Alazán / Tordillo" 
+                 class="w-full p-2.5 text-xs border border-gray-300 rounded focus:border-aguada-gold focus:outline-none">
+        </div>
+
+        <!-- Carga de fotos -->
+        <div class="md:col-span-2 space-y-2">
+          <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Imágenes del Ejemplar (Permite seleccionar varias)</label>
+          <input type="file" id="admFiles" multiple accept="image/*" onchange="previewUploads(event)" 
+                 class="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-aguada-burgundy file:text-white hover:file:bg-aguada-darkBurgundy cursor-pointer">
+          <div id="uploadPreviews" class="flex flex-wrap gap-2 mt-2"></div>
+        </div>
+
+        <div class="md:col-span-2 space-y-1">
+          <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Descripción / Detalles Técnicos y Comerciales</label>
+          <textarea id="admDesc" rows="3" placeholder="Comentarios sobre la docilidad, campaña, condiciones físicas o aptitud reproductiva..." 
+                    class="w-full p-2.5 text-xs border border-gray-300 rounded focus:border-aguada-gold focus:outline-none"></textarea>
+        </div>
+
+        <div class="md:col-span-2 flex gap-3 pt-2">
+          <button type="submit" id="btnSubmitForm" class="bg-aguada-burgundy hover:bg-aguada-darkBurgundy text-white px-6 py-2.5 rounded text-xs font-semibold tracking-wider uppercase transition-all shadow-md">
+            Guardar Ejemplar
+          </button>
+          <button type="button" id="btnCancelEdit" onclick="resetForm()" class="hidden bg-gray-500 hover:bg-gray-600 text-white px-6 py-2.5 rounded text-xs font-semibold tracking-wider uppercase transition-all">
+            Cancelar Edición
+          </button>
+        </div>
+      </form>
+
+      <!-- GESTIÓN DE CATEGORÍAS -->
+      <div class="pt-6 space-y-4 border-t border-gray-200">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <span class="text-aguada-gold text-[10px] font-semibold uppercase tracking-widest">Categorías</span>
+            <h3 class="font-serif text-xl text-aguada-burgundy">Administrar Categorías</h3>
+          </div>
+        </div>
+
+        <form id="categoryForm" onsubmit="handleCategorySubmit(event)" class="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-3 items-end">
+          <div class="space-y-1">
+            <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Nombre de la categoría</label>
+            <input type="text" id="categoryName" placeholder="Ej: Yeguas / Reproductoras" required
+                   class="w-full p-2.5 text-xs border border-gray-300 rounded focus:border-aguada-gold focus:outline-none">
+          </div>
+          <button type="submit" class="bg-aguada-burgundy hover:bg-aguada-darkBurgundy text-white px-5 py-2.5 rounded text-xs font-semibold tracking-wider uppercase transition-all shadow-sm">
+            Crear categoría
+          </button>
+        </form>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse min-w-[280px]">
+            <thead>
+              <tr class="bg-aguada-burgundy text-white text-[11px] uppercase tracking-wider font-semibold">
+                <th class="p-3">Categoría</th>
+                <th class="p-3 text-center">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="adminCategoriesTable" class="divide-y divide-gray-200 text-xs">
+              <!-- Renderizado dinámico -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TABLA DE GESTIÓN -->
+      <div class="pt-6 space-y-4">
+        <h3 class="font-serif text-xl text-aguada-burgundy border-b pb-2">Ejemplares Registrados en Sistema</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse min-w-[700px]">
+            <thead>
+              <tr class="bg-aguada-burgundy text-white text-[11px] uppercase tracking-wider font-semibold">
+                <th class="p-3">Foto</th>
+                <th class="p-3">Nombre</th>
+                <th class="p-3">Categoría</th>
+                <th class="p-3">Año</th>
+                <th class="p-3">Pelaje</th>
+                <th class="p-3 text-center">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="adminTableBody" class="divide-y divide-gray-200 text-xs">
+              <!-- Renderizado dinámico -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- MODAL DE FICHA TÉCNICA Y PEDIGREE -->
+  <div id="pedigreeModal" class="hidden fixed inset-0 z-50 modal-backdrop items-center justify-center p-4">
+    <div class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative border border-aguada-gold/40 fade-in">
+      <button onclick="closeModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-aguada-sand text-aguada-burgundy hover:bg-aguada-burgundy hover:text-white flex items-center justify-center transition-colors z-10">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div id="modalContent" class="p-6 md:p-8 space-y-6">
+        <!-- Contenido dinámico del modal -->
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER INSTITUCIONAL LA AGUADA -->
+  <footer id="contacto" class="bg-aguada-darkBurgundy text-white border-t-2 border-aguada-gold pt-12 pb-6 px-4">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-aguada-gold/20 text-xs">
+      
+      <!-- Col 1 -->
+      <div class="space-y-3">
+        <div class="flex items-center gap-3">
+          <img src="https://www.laaguadapolo.com/wp-content/uploads/2023/09/la-aguada-logo.png" alt="La Aguada" class="h-12 w-auto object-contain" />
+          <span class="font-serif text-base tracking-[0.2em] text-white uppercase">La Aguada</span>
+        </div>
+        <p class="text-gray-300 font-light leading-relaxed">
+          Tradición, pasión y excelencia en la cría y selección de caballos de Polo Argentino. Instalaciones de primer nivel en Open Door, Buenos Aires.
+        </p>
+      </div>
+
+      <!-- Col 2 -->
+      <div class="space-y-3">
+        <h4 class="font-serif text-sm text-aguada-gold tracking-wider uppercase font-semibold">Ubicación & Coordenadas</h4>
+        <p class="text-gray-300 font-light leading-relaxed">
+          Open Door – Ruta 192 – Km 10.5<br>
+          Provincia de Buenos Aires, Argentina.<br>
+          <span class="text-[11px] text-aguada-goldLight/80 block mt-1">
+            <i class="fa-solid fa-location-crosshairs mr-1"></i> Lat: 34°28’12.2″S | Long: 59°05’33.5″W
+          </span>
+        </p>
+      </div>
+
+      <!-- Col 3 -->
+      <div class="space-y-3">
+        <h4 class="font-serif text-sm text-aguada-gold tracking-wider uppercase font-semibold">Contacto Directo</h4>
+        <p class="text-gray-300 font-light">
+          <i class="fa-solid fa-user-check text-aguada-gold mr-2"></i> Hume Thomas<br>
+          <i class="fa-brands fa-whatsapp text-green-400 mr-2"></i> <a href="https://wa.me/5491141571217" target="_blank" class="hover:underline">+54 9 11 4157-1217</a><br>
+          <i class="fa-solid fa-envelope text-aguada-gold mr-2"></i> <a href="mailto:laaguada@laaguadapolo.com" class="hover:underline">laaguada@laaguadapolo.com</a>
+        </p>
+        <div class="flex gap-4 pt-1 text-base text-aguada-gold">
+          <a href="https://instagram.com/laaguada_polo" target="_blank" class="hover:text-white transition-colors flex items-center gap-1 text-xs">
+            <i class="fa-brands fa-instagram text-base"></i> @laaguada_polo
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="max-w-7xl mx-auto pt-4 flex flex-col sm:flex-row justify-between items-center text-[10px] text-gray-400 font-light gap-2">
+      <p>© 2026 LA AGUADA POLO CLUB & RESORT. Todos los derechos reservados.</p>
+      <p class="tracking-widest uppercase">Demostración Conceptual de Alta Gama</p>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT / ESTADO DE LA APLICACIÓN -->
+  <script>
+    // ESTADO DE DATOS (Basado en la genética de La Aguada)
+    let horses = [
+      {
+        id: 1,
+        nombre: "La Aguada Novillo Astrada",
+        categoria: "padrillo",
+        categoriaLabel: "Padrillo / Genética",
+        anio: "2016",
+        pelaje: "Zaino Doradillo",
+        padre: "Dolfina Cuarteto",
+        madre: "La Aguada Pólvora",
+        fotos: [
+          "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80"
+        ],
+        descripcion: "Padrillo insignia de La Aguada. Extraordinaria estructura, mansedumbre y agilidad. Genética directa de la línea madre campeona del Abierto de Tortugas y Palermo."
+      },
+      {
+        id: 2,
+        nombre: "La Aguada Bucanero",
+        categoria: "cancha",
+        categoriaLabel: "Jugando / Cancha",
+        anio: "2018",
+        pelaje: "Alazán",
+        padre: "Open Trotle",
+        madre: "La Aguada Barrilete",
+        fotos: [
+          "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1598974357801-cbca100e65d3?auto=format&fit=crop&w=800&q=80"
+        ],
+        descripcion: "Ejemplar jugado en chukkers de alta exigencia. Destacada velocidad final, boca suave y excelente respuesta en giros cortos."
+      },
+      {
+        id: 3,
+        nombre: "La Aguada Cuartetera",
+        categoria: "cancha",
+        categoriaLabel: "Jugando / Cancha",
+        anio: "2019",
+        pelaje: "Zaina Colorada",
+        padre: "Durazno",
+        madre: "La Aguada Pólvora",
+        fotos: [
+          "https://images.unsplash.com/photo-1598974357801-cbca100e65d3?auto=format&fit=crop&w=800&q=80"
+        ],
+        descripcion: "Yegua de gran ritmo, equilibrio y potencia. Ideal para jugadores de alto handicap que buscan aceleración inmediata."
+      },
+      {
+        id: 4,
+        nombre: "La Aguada Mancebo Real",
+        categoria: "mancebo",
+        categoriaLabel: "Potro / Mancebo",
+        anio: "2022",
+        pelaje: "Tordillo",
+        padre: "La Aguada Novillo Astrada",
+        madre: "La Aguada Golondrina",
+        fotos: [
+          "https://images.unsplash.com/photo-1551884170-09fb70a3a2ed?auto=format&fit=crop&w=800&q=80"
+        ],
+        descripcion: "Potrillo mancebo con excelente proyección para la doma. Estructura ósea sólida y pasos amplios."
+      }
+    ];
+
+    const WHATSAPP_NUM = "5491141571217";
+    const CONTACT_NAME = "Hume Thomas";
+    const defaultCategories = [
+      { id: 'all', name: 'Todos los Ejemplares' },
+      { id: 'padrillo', name: 'Padrillos / Genética' },
+      { id: 'cancha', name: 'Jugando / Cancha' },
+      { id: 'mancebo', name: 'Potros / Mancebos' }
+    ];
+    let categories = [...defaultCategories];
+    let tempImages = [];
+    let isAdminMode = false;
+    let activeCategory = 'all';
+
+    function getCategoryLabel(categoryId) {
+      const match = categories.find(cat => cat.id === categoryId);
+      return match ? match.name : 'Sin categoría';
+    }
+
+    function renderCategorySelect() {
+      const select = document.getElementById('admCategoria');
+      if (!select) return;
+
+      const currentValue = select.value || 'padrillo';
+      const options = categories
+        .filter(cat => cat.id !== 'all')
+        .map(cat => `<option value="${cat.id}">${cat.name}</option>`) 
+        .join('');
+
+      select.innerHTML = options || '<option value="general">Sin categoría</option>';
+      if (Array.from(select.options).some(option => option.value === currentValue)) {
+        select.value = currentValue;
+      } else {
+        select.value = categories.find(cat => cat.id !== 'all')?.id || 'general';
+      }
+    }
+
+    function renderCategoryFilters() {
+      const container = document.getElementById('categoryFilters');
+      if (!container) return;
+
+      container.innerHTML = categories.map(cat => {
+        const isActive = activeCategory === cat.id;
+        const baseClasses = isActive
+          ? 'bg-aguada-burgundy text-white shadow-sm'
+          : 'bg-aguada-sand text-aguada-charcoal hover:bg-aguada-gold/20';
+
+        return `
+          <button class="btn-filter ${baseClasses} px-4 py-2 rounded text-xs tracking-wider uppercase font-medium transition-all" onclick="filterCategory('${cat.id}', this)">
+            ${cat.name}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function renderAdminCategoriesTable() {
+      const tbody = document.getElementById('adminCategoriesTable');
+      if (!tbody) return;
+
+      const rows = categories
+        .filter(cat => cat.id !== 'all')
+        .map(cat => `
+          <tr class="hover:bg-aguada-sand/30 transition-colors">
+            <td class="p-3 font-semibold text-aguada-burgundy">${cat.name}</td>
+            <td class="p-3 text-center">
+              <button onclick="deleteCategory('${cat.id}')" class="bg-rose-800 hover:bg-rose-900 text-white px-2.5 py-1 rounded text-[11px] font-medium transition-colors">
+                Eliminar
+              </button>
+            </td>
+          </tr>
+        `)
+        .join('');
+
+      tbody.innerHTML = rows || `
+        <tr>
+          <td colspan="2" class="p-4 text-center text-gray-500">No hay categorías creadas.</td>
+        </tr>
+      `;
+    }
+
+    // RENDERIZAR GRID DE CABALLOS
+    function renderHorses(items) {
+      const grid = document.getElementById('horsesGrid');
+      
+      if(items.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full py-12 text-center text-gray-500 font-light">
+            <i class="fa-solid fa-horse text-3xl mb-3 text-aguada-gold"></i>
+            <p>No se encontraron ejemplares que coincidan con la búsqueda.</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = items.map(h => `
+        <article class="editorial-card rounded-[20px] overflow-hidden flex flex-col h-full">
+          
+          <!-- Imagen Principal y Badge -->
+          <div class="image-wrap relative h-64 bg-gray-200">
+            <img src="${h.fotos[0]}" alt="${h.nombre}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+            <span class="absolute top-3 left-3 bg-aguada-darkBurgundy/90 text-aguada-gold border border-aguada-gold/40 editorial-label px-2.5 py-1 rounded-full shadow">
+              ${h.categoriaLabel}
+            </span>
+          </div>
+
+          <!-- Información Principal -->
+          <div class="p-5 md:p-6 flex flex-col flex-grow space-y-4">
+            
+            <div>
+              <span class="text-[10px] md:text-[11px] text-aguada-gold uppercase font-semibold tracking-[0.24em]">Polo Argentino · Nac. ${h.anio}</span>
+              <h3 class="editorial-title text-4xl md:text-[2.2rem] text-aguada-burgundy font-medium leading-[0.88] mt-1">${h.nombre}</h3>
+              <p class="text-xs text-gray-500 mt-2"><i class="fa-solid fa-palette text-aguada-gold mr-1"></i> Pelaje: ${h.pelaje}</p>
+            </div>
+
+            <!-- Recuadro Pedigree Resumido -->
+            <div class="bg-aguada-sand/60 border-l-2 border-aguada-gold p-3 text-xs space-y-1 rounded-r-md">
+              <div><strong class="text-aguada-burgundy">Padre:</strong> ${h.padre}</div>
+              <div><strong class="text-aguada-burgundy">Madre:</strong> ${h.madre}</div>
+            </div>
+
+            <!-- Botones de Acción -->
+            <div class="pt-2 mt-auto flex gap-2">
+              <button onclick="openPedigree(${h.id})" 
+                      class="flex-1 bg-transparent hover:bg-aguada-burgundy hover:text-white text-aguada-burgundy border border-aguada-burgundy px-3 py-2 rounded text-[10px] md:text-xs font-semibold tracking-[0.16em] uppercase transition-all duration-300 text-center">
+                <i class="fa-solid fa-file-lines mr-1"></i> Ficha
+              </button>
+
+              ${isAdminMode ? `
+                <button onclick="editHorse(${h.id})" class="bg-aguada-gold hover:bg-amber-600 text-white px-3 py-2 rounded text-[10px] md:text-xs font-semibold tracking-[0.16em] uppercase transition-all">
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+              ` : ''}
+
+              <a href="https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent('Hola ' + CONTACT_NAME + ', estoy interesado en recibir más detalles sobre el ejemplar "' + h.nombre + '" de La Aguada.') }" 
+                 target="_blank" 
+                 class="flex-[1.4] bg-emerald-700 hover:bg-emerald-800 text-white px-3 py-2 rounded text-[10px] md:text-xs font-semibold tracking-[0.16em] uppercase transition-all duration-300 text-center flex items-center justify-center gap-1.5 shadow">
+                <i class="fa-brands fa-whatsapp text-sm"></i> Consultar
+              </a>
+            </div>
+
+          </div>
+        </article>
+      `).join('');
+    }
+
+    // RENDERIZAR TABLA DE ADMINISTRACIÓN
+    function renderAdminTable() {
+      const tbody = document.getElementById('adminTableBody');
+      tbody.innerHTML = horses.map(h => `
+        <tr class="hover:bg-aguada-sand/30 transition-colors">
+          <td class="p-3">
+            <img src="${h.fotos[0]}" class="w-12 h-10 object-cover rounded border border-gray-300">
+          </td>
+          <td class="p-3 font-semibold text-aguada-burgundy">${h.nombre}</td>
+          <td class="p-3 text-gray-600">${getCategoryLabel(h.categoria)}</td>
+          <td class="p-3 text-gray-600">${h.anio}</td>
+          <td class="p-3 text-gray-600">${h.pelaje}</td>
+          <td class="p-3 text-center">
+            <div class="flex justify-center gap-2">
+              <button onclick="editHorse(${h.id})" class="bg-aguada-gold hover:bg-amber-600 text-white px-2.5 py-1 rounded text-[11px] font-medium transition-colors">
+                Editar
+              </button>
+              <button onclick="deleteHorse(${h.id})" class="bg-rose-800 hover:bg-rose-900 text-white px-2.5 py-1 rounded text-[11px] font-medium transition-colors">
+                Eliminar
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // MANEJO DE PREVISUALIZACIÓN DE FOTOS SUBIDAS
+    function previewUploads(e) {
+      const files = e.target.files;
+      const previewContainer = document.getElementById('uploadPreviews');
+      previewContainer.innerHTML = '';
+      tempImages = [];
+
+      Array.from(files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          tempImages.push(evt.target.result);
+          previewContainer.innerHTML += `
+            <img src="${evt.target.result}" class="w-16 h-16 object-cover rounded border border-aguada-gold">
+          `;
+        }
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // GUARDAR / ACTUALIZAR EJEMPLAR (ADMIN)
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const editId = document.getElementById('admId').value;
+      const nombre = document.getElementById('admNombre').value;
+      const categoria = document.getElementById('admCategoria').value;
+      const categoriaLabel = document.getElementById('admCategoria').options[document.getElementById('admCategoria').selectedIndex].text;
+      const anio = document.getElementById('admAnio').value || "2020";
+      const pelaje = document.getElementById('admPelaje').value || "Zaino";
+      const padre = document.getElementById('admPadre').value || "Genética Registrada";
+      const madre = document.getElementById('admMadre').value || "Madre Registrada";
+      const descripcion = document.getElementById('admDesc').value || "Ejemplar en selección especial de La Aguada Polo Club.";
+
+      if (editId) {
+        // Modo Edición
+        const horse = horses.find(h => h.id == editId);
+        if (horse) {
+          horse.nombre = nombre;
+          horse.categoria = categoria;
+          horse.categoriaLabel = categoriaLabel;
+          horse.anio = anio;
+          horse.pelaje = pelaje;
+          horse.padre = padre;
+          horse.madre = madre;
+          horse.descripcion = descripcion;
+          if (tempImages.length > 0) horse.fotos = tempImages;
+        }
+      } else {
+        // Modo Nuevo
+        const newHorse = {
+          id: Date.now(),
+          nombre, categoria, categoriaLabel, anio, pelaje, padre, madre, descripcion,
+          fotos: tempImages.length > 0 ? tempImages : ["https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=800&q=80"]
+        };
+        horses.unshift(newHorse);
+      }
+
+      resetForm();
+      renderCategoryFilters();
+      renderHorses(horses);
+      renderAdminTable();
+      alert('¡Ejemplar guardado exitosamente!');
+    }
+
+    function handleCategorySubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('categoryName');
+      const rawName = input.value.trim();
+
+      if (!rawName) {
+        alert('Ingresá un nombre para la categoría.');
+        return;
+      }
+
+      const normalized = rawName.toLowerCase();
+      const exists = categories.some(cat => cat.id !== 'all' && cat.name.toLowerCase() === normalized);
+      if (exists) {
+        alert('Ya existe una categoría con ese nombre.');
+        return;
+      }
+
+      const id = rawName
+        .toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '') || 'categoria-nueva';
+
+      categories.push({ id, name: rawName });
+      input.value = '';
+      renderCategoryFilters();
+      renderCategorySelect();
+      renderAdminCategoriesTable();
+      alert('Categoría creada correctamente.');
+    }
+
+    function deleteCategory(categoryId) {
+      if (categoryId === 'all') return;
+      const category = categories.find(cat => cat.id === categoryId);
+      if (!category) return;
+
+      const confirmDelete = confirm(`¿Querés eliminar la categoría "${category.name}"?`);
+      if (!confirmDelete) return;
+
+      categories = categories.filter(cat => cat.id !== categoryId);
+      horses = horses.map(h => {
+        if (h.categoria === categoryId) {
+          return { ...h, categoria: 'general', categoriaLabel: 'Sin categoría' };
+        }
+        return h;
+      });
+
+      if (activeCategory === categoryId) {
+        activeCategory = 'all';
+      }
+
+      renderCategoryFilters();
+      renderCategorySelect();
+      renderAdminCategoriesTable();
+      renderHorses(horses);
+      renderAdminTable();
+    }
+
+    // EDITAR EJEMPLAR
+    function editHorse(id) {
+      const h = horses.find(item => item.id === id);
+      if (!h) return;
+
+      if (!isAdminMode) toggleView();
+
+      document.getElementById('formTitle').innerText = `Editando: ${h.nombre}`;
+      document.getElementById('admId').value = h.id;
+      document.getElementById('admNombre').value = h.nombre;
+      document.getElementById('admCategoria').value = h.categoria;
+      document.getElementById('admAnio').value = h.anio;
+      document.getElementById('admPelaje').value = h.pelaje;
+      document.getElementById('admPadre').value = h.padre;
+      document.getElementById('admMadre').value = h.madre;
+      document.getElementById('admDesc').value = h.descripcion;
+
+      const previewContainer = document.getElementById('uploadPreviews');
+      previewContainer.innerHTML = h.fotos.map(f => `<img src="${f}" class="w-16 h-16 object-cover rounded border border-aguada-gold">`).join('');
+      tempImages = [];
+
+      document.getElementById('btnSubmitForm').innerText = "Guardar Cambios";
+      document.getElementById('btnCancelEdit').classList.remove('hidden');
+      
+      window.scrollTo({ top: document.getElementById('adminView').offsetTop - 30, behavior: 'smooth' });
+    }
+
+    // ELIMINAR EJEMPLAR
+    function deleteHorse(id) {
+      if (confirm('¿Está seguro de quitar este ejemplar del catálogo oficial de La Aguada?')) {
+        horses = horses.filter(h => h.id !== id);
+        renderHorses(horses);
+        renderAdminTable();
+      }
+    }
+
+    // REINICIAR FORMULARIO
+    function resetForm() {
+      document.getElementById('horseForm').reset();
+      document.getElementById('admId').value = '';
+      document.getElementById('uploadPreviews').innerHTML = '';
+      tempImages = [];
+      document.getElementById('formTitle').innerText = "Agregar Nuevo Ejemplar al Catálogo";
+      document.getElementById('btnSubmitForm').innerText = "Guardar Ejemplar";
+      document.getElementById('btnCancelEdit').classList.add('hidden');
+    }
+
+    // MODAL DE PEDIGREE / FICHA
+    function openPedigree(id) {
+      const h = horses.find(item => item.id === id);
+      const content = document.getElementById('modalContent');
+      
+      let thumbsHtml = h.fotos.map((f, i) => `
+        <img src="${f}" onclick="changeModalMainImg('${f}', this)" 
+             class="w-16 h-16 object-cover rounded cursor-pointer border-2 ${i===0?'border-aguada-gold':'border-transparent'} hover:border-aguada-gold transition-all">
+      `).join('');
+
+      content.innerHTML = `
+        <div class="border-b border-gray-200 pb-3">
+          <span class="text-aguada-gold text-xs font-semibold uppercase tracking-widest">Ficha Técnica Oficial · La Aguada</span>
+          <h2 class="font-serif text-3xl text-aguada-burgundy font-medium mt-1">${h.nombre}</h2>
+          <p class="text-xs text-gray-500">Raza Polo Argentino · Año ${h.anio} · Pelaje ${h.pelaje}</p>
+        </div>
+
+        <div class="space-y-3">
+          <div class="h-64 md:h-80 bg-gray-100 rounded-lg overflow-hidden border border-aguada-sand">
+            <img id="modalMainImg" src="${h.fotos[0]}" class="w-full h-full object-cover">
+          </div>
+          <div class="flex gap-2">${thumbsHtml}</div>
+        </div>
+
+        <div class="space-y-2">
+          <h4 class="font-serif text-lg text-aguada-burgundy font-medium">Descripción y Aptitud</h4>
+          <p class="text-xs text-gray-600 leading-relaxed">${h.descripcion}</p>
+        </div>
+
+        <!-- Pedigree Box -->
+        <div class="bg-aguada-sand/60 border border-aguada-gold/30 rounded-lg p-4 space-y-2 text-xs">
+          <h4 class="font-serif text-sm font-semibold text-aguada-burgundy border-b border-aguada-gold/20 pb-1">Lineaje y Genética</h4>
+          <div class="grid grid-cols-2 gap-2">
+            <div><strong class="text-aguada-burgundy">Padre:</strong> ${h.padre}</div>
+            <div><strong class="text-aguada-burgundy">Madre:</strong> ${h.madre}</div>
+          </div>
+        </div>
+
+        <!-- Acciones Directas -->
+        <div class="pt-2 flex flex-col sm:flex-row gap-3">
+          <a href="https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent('Hola ' + CONTACT_NAME + ', quisiera coordinar una prueba / visita en La Aguada para el ejemplar "' + h.nombre + '".')}" 
+             target="_blank" 
+             class="flex-1 bg-emerald-700 hover:bg-emerald-800 text-white py-3 rounded text-xs font-semibold tracking-wider uppercase text-center transition-all shadow flex items-center justify-center gap-2">
+            <i class="fa-brands fa-whatsapp text-base"></i> Coordinar Visita con ${CONTACT_NAME}
+          </a>
+          ${isAdminMode ? `
+            <button onclick="closeModal(); editHorse(${h.id});" class="bg-aguada-gold hover:bg-amber-600 text-white px-4 py-3 rounded text-xs font-semibold tracking-wider uppercase transition-all">
+              Editar Datos
+            </button>
+          ` : ''}
+        </div>
+      `;
+      
+      const modal = document.getElementById('pedigreeModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function changeModalMainImg(src, el) {
+      document.getElementById('modalMainImg').src = src;
+      el.parentElement.querySelectorAll('img').forEach(t => {
+        t.classList.remove('border-aguada-gold');
+        t.classList.add('border-transparent');
+      });
+      el.classList.remove('border-transparent');
+      el.classList.add('border-aguada-gold');
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('pedigreeModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // ALTERNAR ENTRE MODO CLIENTE Y MODO ADMINISTRADOR
+    function toggleView() {
+      const cat = document.getElementById('catalogTab');
+      const adm = document.getElementById('adminView');
+      const btn = document.getElementById('toggleAdminBtn');
+      isAdminMode = !isAdminMode;
+
+      if (isAdminMode) {
+        adm.classList.remove('hidden'); 
+        cat.classList.add('hidden');
+        btn.innerHTML = '<i class="fa-solid fa-eye mr-1"></i> Ver Modo Catálogo';
+        btn.classList.add('bg-aguada-gold', 'text-aguada-darkBurgundy');
+        renderAdminTable();
+      } else {
+        adm.classList.add('hidden'); 
+        cat.classList.remove('hidden');
+        btn.innerHTML = '<i class="fa-solid fa-sliders mr-1"></i> Modo Administración';
+        btn.classList.remove('bg-aguada-gold', 'text-aguada-darkBurgundy');
+      }
+      renderHorses(horses);
+    }
+
+    // CAMBIO DE PESTAÑAS (Catálogo / Líneas de Sangre / Polo Clinic)
+    function switchTab(tab) {
+      document.getElementById('catalogTab').classList.add('hidden');
+      document.getElementById('bloodlinesTab').classList.add('hidden');
+      document.getElementById('clinicTab').classList.add('hidden');
+      
+      document.getElementById('navCatalog').classList.remove('text-aguada-gold', 'border-b-2', 'border-aguada-gold');
+      document.getElementById('navBloodlines').classList.remove('text-aguada-gold', 'border-b-2', 'border-aguada-gold');
+      document.getElementById('navClinic').classList.remove('text-aguada-gold', 'border-b-2', 'border-aguada-gold');
+
+      if(isAdminMode) toggleView();
+
+      if(tab === 'catalog') {
+        document.getElementById('catalogTab').classList.remove('hidden');
+        document.getElementById('navCatalog').classList.add('text-aguada-gold', 'border-b-2', 'border-aguada-gold');
+      } else if(tab === 'bloodlines') {
+        document.getElementById('bloodlinesTab').classList.remove('hidden');
+        document.getElementById('navBloodlines').classList.add('text-aguada-gold', 'border-b-2', 'border-aguada-gold');
+      } else if(tab === 'clinic') {
+        document.getElementById('clinicTab').classList.remove('hidden');
+        document.getElementById('navClinic').classList.add('text-aguada-gold', 'border-b-2', 'border-aguada-gold');
+      }
+    }
+
+    // FILTROS DE CATEGORÍA
+    function filterCategory(cat, btn) {
+      activeCategory = cat;
+      renderCategoryFilters();
+
+      if (cat === 'all') renderHorses(horses);
+      else renderHorses(horses.filter(h => h.categoria === cat));
+    }
+
+    // BÚSQUEDA EN TIEMPO REAL
+    function searchHorses() {
+      const q = document.getElementById('searchInput').value.toLowerCase();
+      const filtered = horses.filter(h => 
+        h.nombre.toLowerCase().includes(q) || 
+        h.padre.toLowerCase().includes(q) || 
+        h.madre.toLowerCase().includes(q) ||
+        h.pelaje.toLowerCase().includes(q)
+      );
+      renderHorses(filtered);
+    }
+
+    function scrollToFooter() {
+      document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // INICIALIZACIÓN AL CARGAR LA PÁGINA
+    window.onload = function() {
+      renderCategoryFilters();
+      renderCategorySelect();
+      renderAdminCategoriesTable();
+      renderHorses(horses);
+    }
+  </script>
+</body>
+</html>
