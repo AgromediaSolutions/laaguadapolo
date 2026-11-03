@@ -25,7 +25,7 @@
       "padre": "Open Trotle",
       "madre": "La Aguada Barrilete",
       "fotos": [
-        "images.jfif"
+        "./images.jfif"
       ],
       "descripcion": "Ejemplar jugado en chukkers de alta exigencia. Destacada velocidad final, boca suave y excelente respuesta en giros cortos."
     },
@@ -53,7 +53,7 @@
       "padre": "La Aguada Novillo Astrada",
       "madre": "La Aguada Golondrina",
       "fotos": [
-        "mirando-fijamente-turistas.avif"
+        "./mirando-fijamente-turistas.avif"
       ],
       "descripcion": "Potrillo mancebo con excelente proyección para la doma. Estructura ósea sólida y pasos amplios."
     }
