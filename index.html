@@ -633,6 +633,7 @@
     const STORAGE_KEY = 'laaguada_catalog_state_v1';
     const DATA_FILE_PATH = './catalog-data.json';
     const DATA_FILE_URL = `${DATA_FILE_PATH}?v=${Date.now()}`;
+    const DEFAULT_HORSE_IMAGE = 'https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=800&q=80';
 
     let horses = [
       {
@@ -708,36 +709,30 @@
     let isAdminMode = false;
     let activeCategory = 'all';
 
+    function normalizeHorsePhotos(horse) {
+      const photos = Array.isArray(horse?.fotos) ? horse.fotos.filter(Boolean) : [];
+      return photos.length ? photos : [DEFAULT_HORSE_IMAGE];
+    }
+
+    function normalizeHorseData(list) {
+      return list.map(horse => ({
+        ...horse,
+        fotos: normalizeHorsePhotos(horse)
+      }));
+    }
+
     function saveCatalogData() {
-      const payload = JSON.stringify({ horses, categories });
+      const payload = JSON.stringify({ horses: normalizeHorseData(horses), categories });
       localStorage.setItem(STORAGE_KEY, payload);
     }
 
     async function loadCatalogData() {
-      try {
-        const response = await fetch(DATA_FILE_URL, { cache: 'no-store' });
-        if (!response.ok) throw new Error('No se pudo cargar catalog-data.json');
-
-        const data = await response.json();
-        if (data && Array.isArray(data.horses) && Array.isArray(data.categories)) {
-          horses = data.horses;
-          categories = data.categories;
-          if (!categories.some(cat => cat.id === 'all')) {
-            categories.unshift({ id: 'all', name: 'Todos los Ejemplares' });
-          }
-          saveCatalogData();
-          return;
-        }
-      } catch (error) {
-        console.warn('Fallo la carga fresca del JSON. Se reintenta con el estado guardado:', error);
-      }
-
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         try {
           const parsed = JSON.parse(saved);
           if (parsed && Array.isArray(parsed.horses) && Array.isArray(parsed.categories)) {
-            horses = parsed.horses;
+            horses = normalizeHorseData(parsed.horses);
             categories = parsed.categories;
             if (!categories.some(cat => cat.id === 'all')) {
               categories.unshift({ id: 'all', name: 'Todos los Ejemplares' });
@@ -747,6 +742,23 @@
         } catch (error) {
           console.warn('No se pudo cargar el estado guardado:', error);
         }
+      }
+
+      try {
+        const response = await fetch(DATA_FILE_URL, { cache: 'no-store' });
+        if (!response.ok) throw new Error('No se pudo cargar catalog-data.json');
+
+        const data = await response.json();
+        if (data && Array.isArray(data.horses) && Array.isArray(data.categories)) {
+          horses = normalizeHorseData(data.horses);
+          categories = data.categories;
+          if (!categories.some(cat => cat.id === 'all')) {
+            categories.unshift({ id: 'all', name: 'Todos los Ejemplares' });
+          }
+          saveCatalogData();
+        }
+      } catch (error) {
+        console.warn('Fallo la carga del JSON base. Usando datos locales:', error);
       }
     }
 
@@ -830,12 +842,16 @@
         return;
       }
 
-      grid.innerHTML = items.map(h => `
+      grid.innerHTML = items.map(h => {
+        const photos = normalizeHorsePhotos(h);
+        const mainPhoto = photos[0];
+
+        return `
         <article class="editorial-card rounded-[20px] overflow-hidden flex flex-col h-full">
           
           <!-- Imagen Principal y Badge -->
           <div class="image-wrap relative h-64 bg-gray-200">
-            <img src="${h.fotos[0]}" alt="${h.nombre}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+            <img src="${mainPhoto}" alt="${h.nombre}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
             <span class="absolute top-3 left-3 bg-aguada-darkBurgundy/90 text-aguada-gold border border-aguada-gold/40 editorial-label px-2.5 py-1 rounded-full shadow">
               ${h.categoriaLabel}
             </span>
@@ -878,16 +894,21 @@
 
           </div>
         </article>
-      `).join('');
+      `;
+      }).join('');
     }
 
     // RENDERIZAR TABLA DE ADMINISTRACIÓN
     function renderAdminTable() {
       const tbody = document.getElementById('adminTableBody');
-      tbody.innerHTML = horses.map(h => `
+      tbody.innerHTML = horses.map(h => {
+        const photos = normalizeHorsePhotos(h);
+        const mainPhoto = photos[0];
+
+        return `
         <tr class="hover:bg-aguada-sand/30 transition-colors">
           <td class="p-3">
-            <img src="${h.fotos[0]}" class="w-12 h-10 object-cover rounded border border-gray-300">
+            <img src="${mainPhoto}" class="w-12 h-10 object-cover rounded border border-gray-300">
           </td>
           <td class="p-3 font-semibold text-aguada-burgundy">${h.nombre}</td>
           <td class="p-3 text-gray-600">${getCategoryLabel(h.categoria)}</td>
@@ -904,30 +925,43 @@
             </div>
           </td>
         </tr>
-      `).join('');
+      `;
+      }).join('');
+    }
+
+    function readFilesAsDataUrls(files) {
+      return Promise.all(
+        Array.from(files).map(file => new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = () => reject(new Error('No se pudo leer la imagen'));
+          reader.readAsDataURL(file);
+        }))
+      );
     }
 
     // MANEJO DE PREVISUALIZACIÓN DE FOTOS SUBIDAS
-    function previewUploads(e) {
+    async function previewUploads(e) {
       const files = e.target.files;
       const previewContainer = document.getElementById('uploadPreviews');
       previewContainer.innerHTML = '';
       tempImages = [];
 
-      Array.from(files).forEach(file => {
-        const reader = new FileReader();
-        reader.onload = function(evt) {
-          tempImages.push(evt.target.result);
-          previewContainer.innerHTML += `
-            <img src="${evt.target.result}" class="w-16 h-16 object-cover rounded border border-aguada-gold">
-          `;
-        }
-        reader.readAsDataURL(file);
-      });
+      if (!files || files.length === 0) return;
+
+      try {
+        tempImages = await readFilesAsDataUrls(files);
+        previewContainer.innerHTML = tempImages.map(src => `
+          <img src="${src}" class="w-16 h-16 object-cover rounded border border-aguada-gold">
+        `).join('');
+      } catch (error) {
+        console.error(error);
+        alert('Hubo un problema al cargar una o más imágenes.');
+      }
     }
 
     // GUARDAR / ACTUALIZAR EJEMPLAR (ADMIN)
-    function handleFormSubmit(e) {
+    async function handleFormSubmit(e) {
       e.preventDefault();
       const editId = document.getElementById('admId').value;
       const nombre = document.getElementById('admNombre').value;
@@ -938,6 +972,11 @@
       const padre = document.getElementById('admPadre').value || "Genética Registrada";
       const madre = document.getElementById('admMadre').value || "Madre Registrada";
       const descripcion = document.getElementById('admDesc').value || "Ejemplar en selección especial de La Aguada Polo Club.";
+      const fileInput = document.getElementById('admFiles');
+
+      if (fileInput && fileInput.files && fileInput.files.length > 0) {
+        tempImages = await readFilesAsDataUrls(fileInput.files);
+      }
 
       if (editId) {
         // Modo Edición
@@ -951,14 +990,14 @@
           horse.padre = padre;
           horse.madre = madre;
           horse.descripcion = descripcion;
-          if (tempImages.length > 0) horse.fotos = tempImages;
+          horse.fotos = tempImages.length > 0 ? tempImages : normalizeHorsePhotos(horse);
         }
       } else {
         // Modo Nuevo
         const newHorse = {
           id: Date.now(),
           nombre, categoria, categoriaLabel, anio, pelaje, padre, madre, descripcion,
-          fotos: tempImages.length > 0 ? tempImages : ["https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=800&q=80"]
+          fotos: tempImages.length > 0 ? tempImages : [DEFAULT_HORSE_IMAGE]
         };
         horses.unshift(newHorse);
       }
@@ -1048,7 +1087,8 @@
       document.getElementById('admDesc').value = h.descripcion;
 
       const previewContainer = document.getElementById('uploadPreviews');
-      previewContainer.innerHTML = h.fotos.map(f => `<img src="${f}" class="w-16 h-16 object-cover rounded border border-aguada-gold">`).join('');
+      const existingPhotos = normalizeHorsePhotos(h);
+      previewContainer.innerHTML = existingPhotos.map(f => `<img src="${f}" class="w-16 h-16 object-cover rounded border border-aguada-gold">`).join('');
       tempImages = [];
 
       document.getElementById('btnSubmitForm').innerText = "Guardar Cambios";
@@ -1072,6 +1112,8 @@
       document.getElementById('horseForm').reset();
       document.getElementById('admId').value = '';
       document.getElementById('uploadPreviews').innerHTML = '';
+      const fileInput = document.getElementById('admFiles');
+      if (fileInput) fileInput.value = '';
       tempImages = [];
       document.getElementById('formTitle').innerText = "Agregar Nuevo Ejemplar al Catálogo";
       document.getElementById('btnSubmitForm').innerText = "Guardar Ejemplar";
@@ -1082,8 +1124,9 @@
     function openPedigree(id) {
       const h = horses.find(item => item.id === id);
       const content = document.getElementById('modalContent');
+      const photos = normalizeHorsePhotos(h);
       
-      let thumbsHtml = h.fotos.map((f, i) => `
+      let thumbsHtml = photos.map((f, i) => `
         <img src="${f}" onclick="changeModalMainImg('${f}', this)" 
              class="w-16 h-16 object-cover rounded cursor-pointer border-2 ${i===0?'border-aguada-gold':'border-transparent'} hover:border-aguada-gold transition-all">
       `).join('');
@@ -1097,7 +1140,7 @@
 
         <div class="space-y-3">
           <div class="h-64 md:h-80 bg-gray-100 rounded-lg overflow-hidden border border-aguada-sand">
-            <img id="modalMainImg" src="${h.fotos[0]}" class="w-full h-full object-cover">
+            <img id="modalMainImg" src="${photos[0]}" class="w-full h-full object-cover">
           </div>
           <div class="flex gap-2">${thumbsHtml}</div>
         </div>
