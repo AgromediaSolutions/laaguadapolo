@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>La Aguada Polo & Casa de Campo · Catálogo de Ejemplares</title>
   
   <!-- Fonts -->
@@ -629,6 +632,7 @@
     // ESTADO DE DATOS (Basado en la genética de La Aguada)
     const STORAGE_KEY = 'laaguada_catalog_state_v1';
     const DATA_FILE_PATH = './catalog-data.json';
+    const DATA_FILE_URL = `${DATA_FILE_PATH}?v=${Date.now()}`;
 
     let horses = [
       {
@@ -710,6 +714,24 @@
     }
 
     async function loadCatalogData() {
+      try {
+        const response = await fetch(DATA_FILE_URL, { cache: 'no-store' });
+        if (!response.ok) throw new Error('No se pudo cargar catalog-data.json');
+
+        const data = await response.json();
+        if (data && Array.isArray(data.horses) && Array.isArray(data.categories)) {
+          horses = data.horses;
+          categories = data.categories;
+          if (!categories.some(cat => cat.id === 'all')) {
+            categories.unshift({ id: 'all', name: 'Todos los Ejemplares' });
+          }
+          saveCatalogData();
+          return;
+        }
+      } catch (error) {
+        console.warn('Fallo la carga fresca del JSON. Se reintenta con el estado guardado:', error);
+      }
+
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         try {
@@ -725,22 +747,6 @@
         } catch (error) {
           console.warn('No se pudo cargar el estado guardado:', error);
         }
-      }
-
-      try {
-        const response = await fetch(DATA_FILE_PATH, { cache: 'no-store' });
-        if (!response.ok) throw new Error('No se pudo cargar catalog-data.json');
-        const data = await response.json();
-        if (data && Array.isArray(data.horses) && Array.isArray(data.categories)) {
-          horses = data.horses;
-          categories = data.categories;
-          if (!categories.some(cat => cat.id === 'all')) {
-            categories.unshift({ id: 'all', name: 'Todos los Ejemplares' });
-          }
-          saveCatalogData();
-        }
-      } catch (error) {
-        console.warn('Fallo la carga del JSON base. Usando datos locales:', error);
       }
     }
 
