@@ -1,0 +1,68 @@
+{
+  "horses": [
+    {
+      "id": 1,
+      "nombre": "La Aguada Novillo Astrada",
+      "categoria": "padrillo",
+      "categoriaLabel": "Padrillo / Genética",
+      "anio": "2016",
+      "pelaje": "Zaino Doradillo",
+      "padre": "Dolfina Cuarteto",
+      "madre": "La Aguada Pólvora",
+      "fotos": [
+        "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80"
+      ],
+      "descripcion": "Padrillo insignia de La Aguada. Extraordinaria estructura, mansedumbre y agilidad. Genética directa de la línea madre campeona del Abierto de Tortugas y Palermo."
+    },
+    {
+      "id": 2,
+      "nombre": "La Aguada Bucanero",
+      "categoria": "cancha",
+      "categoriaLabel": "Jugando / Cancha",
+      "anio": "2018",
+      "pelaje": "Alazán",
+      "padre": "Open Trotle",
+      "madre": "La Aguada Barrilete",
+      "fotos": [
+        "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1598974357801-cbca100e65d3?auto=format&fit=crop&w=800&q=80"
+      ],
+      "descripcion": "Ejemplar jugado en chukkers de alta exigencia. Destacada velocidad final, boca suave y excelente respuesta en giros cortos."
+    },
+    {
+      "id": 3,
+      "nombre": "La Aguada Cuartetera",
+      "categoria": "cancha",
+      "categoriaLabel": "Jugando / Cancha",
+      "anio": "2019",
+      "pelaje": "Zaina Colorada",
+      "padre": "Durazno",
+      "madre": "La Aguada Pólvora",
+      "fotos": [
+        "https://images.unsplash.com/photo-1598974357801-cbca100e65d3?auto=format&fit=crop&w=800&q=80"
+      ],
+      "descripcion": "Yegua de gran ritmo, equilibrio y potencia. Ideal para jugadores de alto handicap que buscan aceleración inmediata."
+    },
+    {
+      "id": 4,
+      "nombre": "La Aguada Mancebo Real",
+      "categoria": "mancebo",
+      "categoriaLabel": "Potro / Mancebo",
+      "anio": "2022",
+      "pelaje": "Tordillo",
+      "padre": "La Aguada Novillo Astrada",
+      "madre": "La Aguada Golondrina",
+      "fotos": [
+        "https://images.unsplash.com/photo-1551884170-09fb70a3a2ed?auto=format&fit=crop&w=800&q=80"
+      ],
+      "descripcion": "Potrillo mancebo con excelente proyección para la doma. Estructura ósea sólida y pasos amplios."
+    }
+  ],
+  "categories": [
+    { "id": "all", "name": "Todos los Ejemplares" },
+    { "id": "padrillo", "name": "Padrillos / Genética" },
+    { "id": "cancha", "name": "Jugando / Cancha" },
+    { "id": "mancebo", "name": "Potros / Mancebos" }
+  ]
+}
